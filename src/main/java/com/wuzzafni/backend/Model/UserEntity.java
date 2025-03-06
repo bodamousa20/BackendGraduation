@@ -24,7 +24,6 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-
     private Long id = generateRandomId();
 
 
@@ -58,7 +57,7 @@ public class UserEntity {
     private List<Job> savedJobs ;
 
     @OneToOne(cascade = CascadeType.ALL)  // Ensures image is saved properly
-    @JoinColumn(name = "Cv_image")
+    @JoinColumn(name = "cv_image", referencedColumnName = "id")
     private Image userCvImage ;
 
     @OneToOne(cascade = CascadeType.ALL)

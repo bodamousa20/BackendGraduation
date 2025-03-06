@@ -15,6 +15,7 @@ import java.sql.Blob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name="image")
 public class Image {
 
     @Id
@@ -24,7 +25,6 @@ public class Image {
     private String fileType;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
     private Blob image;
     private String downloadUrl;
 
