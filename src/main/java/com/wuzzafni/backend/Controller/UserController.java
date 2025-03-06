@@ -79,10 +79,10 @@ public class UserController {
 
         }
     }
-  /*  @PostMapping("/saveJob")
-    public ResponseEntity<ApiResponse>saveJobByUser(@ModelAttribute SaveJobRequest request){
+   @PostMapping("/saveJob")
+    public ResponseEntity<ApiResponse>saveJobByUser(@ModelAttribute SaveJobRequest request ,@RequestParam("userId") Long id){
         try {
-           Job job = userServices.saveJobByUser(request);
+           Job job = userServices.saveJobByUserId(request,id);
             return ResponseEntity.ok(new ApiResponse("success",userServices.convertToDtoMethod(job) ));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(),null));
@@ -90,16 +90,6 @@ public class UserController {
         }
     }
 
-
-    @GetMapping("/job/{jobId}")
-    public ResponseEntity<ApiResponse>saveJobByUser(@PathVariable Long jobId){
-        try {
-            return ResponseEntity.ok(new ApiResponse("success",userServices.getJob(jobId)));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("failed",null));
-
-        }
-    }
 
     @GetMapping("/jobs/{userId}")
     public ResponseEntity<ApiResponse>getUserJobs(@PathVariable Long userId){
@@ -125,44 +115,6 @@ public class UserController {
 
 
 
-    @Autowired
-    private JavaMailSender mailSender;
-
-    public String sendHtmlEmail(String receiver, String link,String name) throws MessagingException, IOException {
-        try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-            helper.setFrom("reikomahmoud208@gmail.com");
-            helper.setTo(receiver);
-            helper.setSubject("Welcome to Wuzzufni");
-
-            // Read the HTML template
-            String emailContent;
-            try (var inputStream = Objects.requireNonNull(UserController.class.getResourceAsStream("/templates/Wuzzufni_Email.html"))) {
-                emailContent = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-            }
-
-            // Replace the placeholder with the actual link
-            emailContent = emailContent.replace("{{link}}", link);
-            emailContent = emailContent.replace("{{name}}", name);
-            helper.addInline("wuzzufni", new ClassPathResource("static/wuzzufni.png"));
 
 
-            // Set the email content
-            helper.setText(emailContent, true);
-
-            // Add inline image
-
-            mailSender.send(message);
-            return "email sent";
-        } catch (MessagingException | IOException | MailException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
-
-*/
 }

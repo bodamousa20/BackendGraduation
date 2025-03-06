@@ -22,7 +22,8 @@ userDto convertUserToDto(UserEntity user);
 
     UserEntity getUser(Long id );
 
- Job saveJobByUserId(Job request,Long id );
+
+    Job saveJobByUserId(SaveJobRequest request, Long id);
 
     JobDto getSavedJob(Long jobId);
 

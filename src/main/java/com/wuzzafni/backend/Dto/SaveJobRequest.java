@@ -8,11 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SaveJobRequest {
-    private Long id ;
+
     private String title ;
     private String description ;
     private String jobLink ;
     private String ImageLink ;
+    private String companyName ;
+    private String location ;
+    private String date ;
 
 
 }

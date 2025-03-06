@@ -1,6 +1,7 @@
 package com.wuzzafni.backend.Services;
 
 import com.wuzzafni.backend.Dto.JobDto;
+import com.wuzzafni.backend.Dto.SaveJobRequest;
 import com.wuzzafni.backend.Dto.SaveUserRequest;
 import com.wuzzafni.backend.Dto.userDto;
 import com.wuzzafni.backend.Exception.ResourceNotFoundException;
@@ -101,17 +102,17 @@ public class UserServices implements IUserServices {
     }
 
     @Override
-    public Job saveJobByUserId(Job request,Long id ) {
+    public Job saveJobByUserId(SaveJobRequest request, Long id ) {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
 
         try {
             Job newJob = new Job();
             newJob.setJobLink(request.getJobLink());
-            newJob.setJobDate(request.getJobDate());
+            newJob.setJobDate(request.getDate());
             newJob.setImageLink(request.getImageLink());
             newJob.setDescription(request.getDescription());
-            newJob.setJobName(request.getJobName());
+            newJob.setJobName(request.getTitle());
             newJob.setLocation(request.getLocation());
             newJob.setCompanyName(request.getCompanyName());
 
